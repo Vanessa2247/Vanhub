@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vanhub – Welcome</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    /* Animated background particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 420px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.8s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #00d4ff, #0099cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5)); }
+      to { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
+    }
+    
+    .subtitle {
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+    }
+    
+    .description {
+      font-size: 0.95em;
+      margin-bottom: 25px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.4;
+    }
+    
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      font-size: 1em;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #00d4ff;
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .input-error {
+      border-color: #ff4757 !important;
+      box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2) !important;
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      background: linear-gradient(45deg, #00d4ff, #0099cc);
+      color: white;
+      border-radius: 12px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .footer {
+      margin-top: 25px;
+      font-size: 0.9em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer a {
+      color: #00d4ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer a:hover {
+      color: #0099cc;
+      text-decoration: underline;
+    }
+    
+    .error-message {
+      color: #ff4757;
+      font-size: 0.9em;
+      margin-top: 10px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .error-message.show {
+      opacity: 1;
+    }
+    
+    .loading {
+      display: none;
+      margin-top: 10px;
+    }
+    
+    .spinner {
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid #00d4ff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .subtitle {
+        font-size: 1em;
+      }
+    }
+    
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* Focus styles for keyboard navigation */
+    button:focus,
+    input:focus,
+    a:focus {
+      outline: 2px solid #00d4ff;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+  
+  <div class="container">
+    <h1>Welcome to Vanhub</h1>
+    <p class="subtitle">Enter the hub. Stay in the loop.</p>
+    
+    <p class="description">
+      <strong>Please enter your USERID to access Vanessa's exclusive content and community features.</strong>
+    </p>
+    
+    <form id="accessForm" novalidate>
+      <div class="form-group">
+        <input 
+          type="text" 
+          id="userid" 
+          placeholder="Enter your USERID"
+          required
+          aria-label="User ID"
+          autocomplete="username"
+        >
+      </div>
+      
+      <button type="submit" id="accessBtn">
+        Access Now
+      </button>
+      
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+      </div>
+      
+      <div class="error-message" id="errorMessage" role="alert">
+        Invalid USERID. Please check your credentials and try again.
+      </div>
+    </form>
+    
+    <div class="footer">
+      Don't have a USERID? <a href="#" id="registerLink">Get one here</a>
+    </div>
+  </div>
+
+  <script>
+    // Create animated background particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.width = Math.random() * 4 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Form handling
+    const form = document.getElementById('accessForm');
+    const useridInput = document.getElementById('userid');
+    const accessBtn = document.getElementById('accessBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const loading = document.getElementById('loading');
+    const registerLink = document.getElementById('registerLink');
+    
+    // Simulate valid userids (in real app, this would be server-side validation)
+    const validUserids = ['demo', 'test', 'vanessa', 'admin'];
+    
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      useridInput.classList.add('input-error');
+      
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+        useridInput.classList.remove('input-error');
+      }, 3000);
+    }
+    
+    function showLoading() {
+      loading.style.display = 'block';
+      accessBtn.disabled = true;
+      accessBtn.textContent = 'Authenticating...';
+    }
+    
+    function hideLoading() {
+      loading.style.display = 'none';
+      accessBtn.disabled = false;
+      accessBtn.textContent = 'Access Now';
+    }
+    
+    function validateUserid(userid) {
+      if (!userid || userid.length < 3) {
+        return { valid: false, message: 'USERID must be at least 3 characters long.' };
+      }
+      
+      if (!/^[a-zA-Z0-9_-]+$/.test(userid)) {
+        return { valid: false, message: 'USERID can only contain letters, numbers, hyphens, and underscores.' };
+      }
+      
+      if (!validUserids.includes(userid.toLowerCase())) {
+        return { valid: false, message: 'Invalid USERID. Please check your credentials and try again.' };
+      }
+      
+      return { valid: true };
+    }
+    
+    function accessSite() {
+      const userid = useridInput.value.trim();
+      const validation = validateUserid(userid);
+      
+      if (!validation.valid) {
+        showError(validation.message);
+        return;
+      }
+      
+      showLoading();
+      
+      // Simulate API call
+      setTimeout(() => {
+        hideLoading();
+        
+        // In a real application, you'd redirect to the authenticated area
+        alert(`Welcome ${userid}! Redirecting to your dashboard...`);
+        
+        // Simulate redirect
+        setTimeout(() => {
+          window.location.href = '/dashboard'; // This would be your actual dashboard URL
+        }, 1000);
+      }, 2000);
+    }
+    
+    // Event listeners
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      accessSite();
+    });
+    
+    useridInput.addEventListener('input', () => {
+      // Clear error state when user starts typing
+      errorMessage.classList.remove('show');
+      useridInput.classList.remove('input-error');
+    });
+    
+    registerLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Registration feature coming soon! Please contact support for a USERID.');
+    });
+    
+    // Initialize particles when page loads
+    document.addEventListener('DOMContentLoaded', createParticles);
+    
+    // Add keyboard accessibility
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && document.activeElement === useridInput) {
+        accessSite();
+      }
+    });
+  </script>
+</body>
+</html>
